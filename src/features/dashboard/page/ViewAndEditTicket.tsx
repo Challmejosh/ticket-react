@@ -7,12 +7,16 @@ import Form from "../component/ui/Form";
 import Input from "../component/ui/Input";
 import Select from "../component/ui/Select";
 import TextArea from "../component/ui/TextArea";
-import { ArrowLeft, Edit, Loader2 } from "lucide-react";
+import { ArrowLeft, Edit, Loader2, Trash2 } from "lucide-react";
 import useUpdate, { type UpdateTicketType } from "../hook/useUpdate";
+import useDelete from "../hook/useDelete";
+import ConfirmModal from "../component/ui/confirmModal";
+// import ConfirmModal from "../component/ui/ConfirmModal";
 
 const ViewAndEditTicket = () => {
     const { id } = useParams()
-    const { ticketUpdate, isPending} = useUpdate()
+    const { ticketUpdate, isPending: isUpdating} = useUpdate()
+    const { ticketDelete, isPending: isDeleting, isModalOpen, openModal } = useDelete()
     const { user, tickets } = useContext(AppContext)
     const [ticket,setTicket] = useState<TicketType|null>(null)
     const [form, setForm] = useState<TicketType | null>(null)
@@ -62,6 +66,15 @@ const ViewAndEditTicket = () => {
         })
     }
 
+    const handleDeleteClick = () => {
+        openModal(true);
+    };
+
+    const handleConfirmDelete = () => {
+        // The useDelete hook will handle navigation on success
+        ticketDelete(id as string);
+    };
+
     const getPriorityColor = (priority: string) => {
         switch (priority) {
             case "high": return "bg-red-500";
@@ -98,9 +111,14 @@ const ViewAndEditTicket = () => {
                         <ArrowLeft size={16} /> Back to Tickets
                     </button>
                     {!isEditing && (
-                        <button onClick={() => setIsEditing(true)} className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
-                            <Edit size={16} /> Edit
-                        </button>
+                        <div className="flex items-center gap-2">
+                            <button onClick={handleDeleteClick} className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700">
+                                <Trash2 size={16} /> Delete
+                            </button>
+                            <button onClick={() => setIsEditing(true)} className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
+                                <Edit size={16} /> Edit
+                            </button>
+                        </div>
                     )}
                 </div>
 
@@ -108,7 +126,7 @@ const ViewAndEditTicket = () => {
                      <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
                         <h1 className="text-2xl font-bold mb-6">Edit Ticket</h1>
                         <Form
-                            loading={isPending}
+                            loading={isUpdating}
                             submit={handleUpdate}
                             buttonText="Save Changes"
                             extraBtnText="Cancel"
@@ -186,6 +204,14 @@ const ViewAndEditTicket = () => {
                     </div>
                 )}
             </div>
+            <ConfirmModal
+                isOpen={isModalOpen}
+                onClose={() => openModal(false)}
+                onConfirm={handleConfirmDelete}
+                title="Delete Ticket"
+                message={`Are you sure you want to delete the ticket "${ticket.title}"? This action cannot be undone.`}
+                loading={isDeleting}
+            />
         </DashboardLayout>
      );
 }
