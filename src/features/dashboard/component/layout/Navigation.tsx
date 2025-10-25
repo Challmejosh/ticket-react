@@ -56,7 +56,7 @@ const Navigation = () => {
                             flex gap-2 items-center justify-start w-full rounded-lg
                             p-2 capitalize font-semibold hover:bg-[#3b82f6]/20
                             hover:text-[#3b82f6]
-                            ${pathname===item.href?"bg-[#3b82f6]/20 text-[#3b82f6] ":""}
+                            ${pathname.includes(item.href)?"bg-[#3b82f6]/20 text-[#3b82f6] ":""}
                             `}
                         >
                             {item.icon}
@@ -145,7 +145,7 @@ const Navigation = () => {
                                     flex gap-2 items-center justify-start w-full rounded-lg
                                     p-2 capitalize font-semibold hover:bg-[#3b82f6]/20
                                     hover:text-[#3b82f6]
-                                    ${pathname===item.href?"bg-[#3b82f6]/20 text-[#3b82f6] ":""}
+                                    ${pathname.includes(item.href)?"bg-[#3b82f6]/20 text-[#3b82f6] ":""}
                                     `}
                                 >
                                     {item.icon}
