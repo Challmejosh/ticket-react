@@ -31,19 +31,19 @@ const AppProvider = ({children}:Prop) => {
         ));
     };
     const saveUser = (user:User)=>{
-        localStorage.setItem('user',JSON.stringify(user))
+        localStorage.setItem('ticketapp_session',JSON.stringify(user))
         setUser(user)
     }
     const saveTickets = (tickets:TicketType[])=>{
         setTickets(tickets)
     }
     const logOut = ()=>{
-        localStorage.removeItem('user')
+        localStorage.removeItem('ticketapp_session')
         setUser(null)
         navigate("/")
     }
     useEffect(()=>{
-        const user = localStorage.getItem('user')
+        const user = localStorage.getItem('ticketapp_session')
         if(user){
             saveUser(JSON.parse(user))
         }
