@@ -59,7 +59,6 @@ const Signup = () => {
     return ( 
         <Authlayout>
             <Form 
-            className="w-full sm:w-[500px]"
             loading={isPending}
             submit={handleSignup}
             header="create an account"
@@ -102,7 +101,7 @@ const Signup = () => {
                         (form.email.includes(form.password) || form.name.includes(form.password))?
                         "Password cannot contain name or email" :
                         !isPasswordValid ? 
-                        "Password must contain at least one uppercase letter, one number, and one special character"
+                        "At least uppercase, number & symbol."
                         :"Please enter a valid password"}
                         
                         />
@@ -118,7 +117,7 @@ const Signup = () => {
                         :(form.email.includes(form.password) || form.name.includes(form.password))?
                         "Password cannot contain name or email" :
                         !isPasswordValid ? 
-                        "Require at least uppercase, number & symbol."
+                        "At least uppercase, number & symbol."
                         :"Please enter a valid password"}
                     onChange={(e)=>setForm({...form,passwordConfirm: e.target.value})}
                     value={form.passwordConfirm}

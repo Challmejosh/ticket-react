@@ -15,7 +15,7 @@ const Form = ({header, desc, buttonText, children,submit,loading, ...rest}:Prop)
         <form
         onSubmit={submit}
         {...rest}
-        className="flex flex-col gap-6 items-center justify-center shadow-lg rounded-lg bg-white dark:bg-slate-900/70 dark:backdrop-blur-sm p-8 shadow-soft border border-slate-200 dark:border-slate-800 ">
+        className={`flex flex-col w-full sm:w-fit sm:min-w-[500px] gap-6 items-center justify-center shadow-lg rounded-lg bg-white dark:bg-slate-900/70 dark:backdrop-blur-sm p-8 shadow-soft border border-slate-200 dark:border-slate-800 `}>
             <div className="flex flex-col gap-2 items-center justify-center text-center">
                 <h2 
                 className="text-2xl capitalize font-bold text-text-light dark:text-text-dark">
@@ -31,7 +31,7 @@ const Form = ({header, desc, buttonText, children,submit,loading, ...rest}:Prop)
             <button 
             type="submit"
             className="
-            flex w-full min-w-[84px] max-w-[480px] cursor-pointer
+            flex w-full min-w-[84px] cursor-pointer
             items-center justify-center overflow-hidden rounded-lg
             h-11 px-6 bg-[#3b82f6] text-white text-sm font-bold
             shadow-md hover:shadow-lg transition-all duration-200 

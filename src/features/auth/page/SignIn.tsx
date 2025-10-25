@@ -40,7 +40,6 @@ const SignIn = () => {
     return ( 
         <Authlayout>
                 <Form 
-                className="w-full sm:w-[400px] "
                 loading={isPending}
                 header="welcome back"
                 desc='Sign in to continue to your dashboard.'
