@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.form-field {
+    @apply w-full rounded-lg border border-slate-300 
+     bg-white
+    px-4 py-2.5 text-base text-[#0f172a] 
+    placeholder:text-slate-400 
+    transition-colors duration-200
+}
